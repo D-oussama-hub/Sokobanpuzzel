@@ -1,7 +1,9 @@
-OOOOO
-  O   O
-  O * O
-OOO B OOO
-O B R B O
-O S   S O
-OOOOOOOOO
+ OOOO
+ O  O
+ O  OOO
+ O *  O
+OOBOB O
+O SRS O
+O    OO
+OOO  O
+  OOOO
