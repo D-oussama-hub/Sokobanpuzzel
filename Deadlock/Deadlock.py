@@ -24,30 +24,69 @@ def compute_dead_positions(grid):
 
     dead = set(corners)
 
-    # --- 2) Deadlock de ligne -----------------------------------------
- 
+    # 2) Deadlock de ligne 
+
     for (i1, j1) in corners:
         for (i2, j2) in corners:
 
-            # ligne horizontale
+            # LIGNE HORIZONTALE 
             if i1 == i2 and j1 < j2:
-                entre = [(i1, j) for j in range(j1 + 1, j2)]
-                if entre and all(not wall(i, j) and not target(i, j)
-                                 for (i, j) in entre):
-                    mur_haut = all(wall(i - 1, j) for (i, j) in entre)
-                    mur_bas = all(wall(i + 1, j) for (i, j) in entre)
-                    if mur_haut or mur_bas:
-                        dead.update(entre)
 
-            # ligne verticale
+                # 1) Construire la liste des cases entre les deux coins
+                entre = []
+                for j in range(j1 + 1, j2):
+                    entre.append((i1, j))
+
+                if len(entre) > 0:
+
+                    # 3) Vérifier qu'il n'y a ni mur ni cible entre les coins
+                    segment_libre = True
+                    for (i, j) in entre:
+                        if wall(i, j) or target(i, j):
+                            segment_libre = False
+
+                    # 4) Vérifier si un mur longe le segment en haut ou en bas
+                    mur_haut = True
+                    mur_bas = True
+                    for (i, j) in entre:
+                        if not wall(i - 1, j):      
+                            mur_haut = False
+                        if not wall(i + 1, j):      
+                            mur_bas = False
+
+                    if segment_libre and (mur_haut or mur_bas):
+                        for case in entre:
+                            dead.add(case)
+
+            # LIGNE VERTICALE 
             if j1 == j2 and i1 < i2:
-                entre = [(i, j1) for i in range(i1 + 1, i2)]
-                if entre and all(not wall(i, j) and not target(i, j)
-                                 for (i, j) in entre):
-                    mur_gauche = all(wall(i, j - 1) for (i, j) in entre)
-                    mur_droite = all(wall(i, j + 1) for (i, j) in entre)
-                    if mur_gauche or mur_droite:
-                        dead.update(entre)
+
+                # 1) Construire la liste des cases entre les deux coins
+                entre = []
+                for i in range(i1 + 1, i2):
+                    entre.append((i, j1))
+
+                if len(entre) > 0:
+
+                    # 3) Vérifier qu'il n'y a ni mur ni cible entre les coins
+                    segment_libre = True
+                    for (i, j) in entre:
+                        if wall(i, j) or target(i, j):
+                            segment_libre = False
+
+                    # 4) Vérifier si un mur longe le segment à gauche ou à droite
+                    mur_gauche = True
+                    mur_droite = True
+                    for (i, j) in entre:
+                        if not wall(i, j - 1):      
+                            mur_gauche = False
+                        if not wall(i, j + 1):     
+                            mur_droite = False
+
+                    # 5) Si tout est bon, toutes ces cases sont mortes
+                    if segment_libre and (mur_gauche or mur_droite):
+                        for case in entre:
+                            dead.add(case)
 
     return dead
 
@@ -55,18 +94,6 @@ def compute_dead_positions(grid):
 def has_deadlock(state, dead_positions):
     """True si une caisse (hors cible) est sur une case morte."""
     for (i, j) in state.boxes_left():
-        if (i, j) in dead_positions:
+        if (i, j) in dead_positions: # verifie si la caisse est sur une case morte
             return True
     return False
-
-
-def show_dead_positions(grid, dead_positions):
-    """Affiche la grille avec 'x' sur les cases mortes (pour le rapport)."""
-    for i in range(len(grid)):
-        ligne = ""
-        for j in range(len(grid[i])):
-            if (i, j) in dead_positions:
-                ligne += 'x'
-            else:
-                ligne += grid[i][j] if grid[i][j] not in ('R', 'B') else ' '
-        print(ligne)
