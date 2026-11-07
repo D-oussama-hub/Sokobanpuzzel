@@ -1,6 +1,6 @@
 
 ACTIONS = [('UP', -1, 0), ('DOWN', 1, 0), ('LEFT', 0, -1), ('RIGHT', 0, 1)]
-
+#index 0 : nom de l'action, index 1 : delta ligne, index 2 : delta colonne
 
 def move(state, dr, dc):
     #Applique un mouvement (dr, dc). Renvoie le nouvel état ou None
