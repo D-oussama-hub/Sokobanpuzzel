@@ -1,8 +1,8 @@
-OOOOOOOO
-OS    SO
-O  OO  O
-O B  B O
-O  R   O
-O   B  O
-O S    O
-OOOOOOOO
+OOOOOOO
+O     O
+O B R O
+OOO OO OOO
+  O B   O
+  O  S  O
+  O  S  O
+  OOOOOOO
