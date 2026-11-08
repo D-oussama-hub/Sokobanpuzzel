@@ -356,7 +356,7 @@ class Game:
         cell = max(16, min(40, 310 // cols, 260 // rows))
         self.draw_grid(self.preview, 470, 100, cell)
 
-    # -- écran de jeu ----------------------------------------------------
+    # -- écran de jeu ---------------------------------------------------- 
     def draw_play(self):
         self.draw_grid(self.puzzle.grid, self.ox, 0, self.cell)
         y0 = len(self.puzzle.grid) * self.cell
@@ -384,8 +384,8 @@ class Game:
                     f"Coût de la solution : {d} mouvements",
                     f"Complexité temporelle : {exp} nœuds développés, "
                     f"{gen} générés",
-                    f"Complexité spatiale : {s['max_nodes']} nœuds en "
-                    f"mémoire (max)",
+                    #f"Complexité spatiale : {s['max_nodes']} nœuds en "
+                    #f"mémoire (max)",
                     f"Branchement effectif b ~ {b:.2f}  ->  O(b^d), d = {d}",
                     f"Temps d'exécution : {r['elapsed']:.3f} s",
                 ]
@@ -395,8 +395,8 @@ class Game:
                     "Coût de la solution : aucune solution",
                     f"Complexité temporelle : {exp} nœuds développés, "
                     f"{gen} générés",
-                    f"Complexité spatiale : {s['max_nodes']} nœuds en "
-                    f"mémoire (max)",
+                    #f"Complexité spatiale : {s['max_nodes']} nœuds en "
+                    #f"mémoire (max)",
                     f"Temps d'exécution : {r['elapsed']:.3f} s",
                 ]
                 color = C_TEXT
