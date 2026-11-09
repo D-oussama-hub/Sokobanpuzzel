@@ -4,7 +4,7 @@ import time
 from game_UI.interface import run, load_level, solve, H_NAMES, NB_LEVELS
 from Sokoban.state import SokobanPuzzle
 
-
+# keywords: BFS, A*, heuristic, deadlock, benchmark, Sokoban 
 def benchmark(levels):
     """Compare BFS et A* (h1, h2, h3, avec deadlock) sur chaque niveau."""
     print(f"{'Niveau':<7}{'Algo':<10}{'Long.':>6}{'Temps(s)':>10}"
