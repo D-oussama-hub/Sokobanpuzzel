@@ -94,6 +94,6 @@ def compute_dead_positions(grid):
 def has_deadlock(state, dead_positions):
     """True si une caisse (hors cible) est sur une case morte."""
     for (i, j) in state.boxes_left():
-        if (i, j) in dead_positions: # verifie si la caisse est sur une case morte
+        if (i, j) in dead_positions: 
             return True
     return False
